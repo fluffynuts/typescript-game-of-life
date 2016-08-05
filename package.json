@@ -1,0 +1,47 @@
+{
+  "name": "game_of_life",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pregame": "run-s build lint test",
+    "game": "node index.js",
+    "install-packages": "npm install",
+    "install-typings": "typings install",
+    "prebuild": "run-s install-packages install-typings",
+    "build": "tsc",
+    "prebublish": "tsc",
+    "clean-js": "rimraf js",
+    "clean-modules": "rimraf node_modules",
+    "clean": "run-p clean-js clean-modules",
+    "postinstall": "typings install",
+    "lint": "tslint src/**/*.ts spec/**/*.ts",
+    "pretest": "run-s lint",
+    "test": "mocha ts/spec/**/*.ts --require ts-node/register",
+    "automocha": "cross-env CONTINUOUS_TESTING=1 mocha ts/spec/**/*.ts --require ts-node/register --reporter mocha-yar --watch --watch-extensions ts",
+    "autolint": "nodemon -q -I -e ts node_modules/tslint/bin/tslint --force ts/src/**/*.ts ts/spec/**/*.ts",
+    "autotest": "run-p automocha autolint"
+  },
+  "author": "Davyd McColl <davydm@gmail.com> (https://github.com/fluffynuts)",
+  "license": "ISC",
+  "dependencies": {
+    "ansi": "^0.3.1",
+    "axel": "0.0.3",
+    "blessed": "^0.1.81",
+    "keypress": "^0.2.1",
+    "lodash": "^4.14.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "cross-env": "^2.0.0",
+    "mocha": "^3.0.1",
+    "mocha-yar": "^1.0.10",
+    "nodemon": "^1.10.0",
+    "npm-run-all": "^2.3.0",
+    "rimraf": "^2.5.4",
+    "ts-node": "^1.2.2",
+    "tslint": "^3.14.0",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2"
+  }
+}
