@@ -2,10 +2,12 @@
   "name": "game_of_life",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "pregame": "run-s build lint test",
-    "game": "node index.js",
+    "prestart": "run-s tsc lint test",
+    "start": "run-s game",
+    "game": "ts-node index.ts",
+    "tsc": "tsc",
     "install-packages": "npm install",
     "install-typings": "typings install",
     "prebuild": "run-s install-packages install-typings",
@@ -14,13 +16,12 @@
     "clean-js": "rimraf js",
     "clean-modules": "rimraf node_modules",
     "clean": "run-p clean-js clean-modules",
-    "postinstall": "typings install",
     "lint": "tslint src/**/*.ts spec/**/*.ts",
     "pretest": "run-s lint",
-    "test": "mocha ts/spec/**/*.ts --require ts-node/register",
-    "automocha": "cross-env CONTINUOUS_TESTING=1 mocha ts/spec/**/*.ts --require ts-node/register --reporter mocha-yar --watch --watch-extensions ts",
+    "test": "jest",
+    "automocha": "cross-env CONTINUOUS_TESTING=1 jest --watchAll",
     "autolint": "nodemon -q -I -e ts node_modules/tslint/bin/tslint --force ts/src/**/*.ts ts/spec/**/*.ts",
-    "autotest": "run-p automocha autolint"
+    "autotest": "run-p autojest autolint"
   },
   "author": "Davyd McColl <davydm@gmail.com> (https://github.com/fluffynuts)",
   "license": "ISC",
@@ -29,19 +30,19 @@
     "axel": "0.0.3",
     "blessed": "^0.1.81",
     "keypress": "^0.2.1",
-    "lodash": "^4.14.1"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "cross-env": "^2.0.0",
-    "mocha": "^3.0.1",
-    "mocha-yar": "^1.0.10",
-    "nodemon": "^1.10.0",
-    "npm-run-all": "^2.3.0",
-    "rimraf": "^2.5.4",
-    "ts-node": "^1.2.2",
-    "tslint": "^3.14.0",
-    "typescript": "^1.8.10",
-    "typings": "^1.3.2"
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.1",
+    "cross-env": "^7.0.2",
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
   }
 }

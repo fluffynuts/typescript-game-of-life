@@ -39,3 +39,4 @@ jspm_packages
 # typescript artifacts
 js
 typings
+.idea

@@ -1,8 +1,7 @@
-import { expect } from 'chai';
-import { tick } from '../src/game_of_life';
+import { tick } from "../src/game_of_life";
 
 if (process.env.CONTINUOUS_TESTING) {
-  console.log('Test run started at: ', new Date());
+  console.log("Test run started at: ", new Date());
 }
 /*
 Game of life rules:
@@ -12,14 +11,14 @@ Populated cell:
 Unpopulated cell:
   > 2 neighbors => alive
 */
-describe('game_of_life', () => {
+describe("game_of_life", () => {
   const emptyBoard = [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0]
   ];
-  describe('tick', () => {
-    it('should leave a barren wasteland as it was', () => {
+  describe("tick", () => {
+    it("should leave a barren wasteland as it was", () => {
       // Arrange
       const
         board = emptyBoard,
@@ -27,9 +26,9 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result).to.eql(board);
+      expect(result).toEqual(board);
     });
-    it('should always return copies', () => {
+    it("should always return copies", () => {
       // Arrange
       const
         board = emptyBoard,
@@ -37,10 +36,10 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result).not.to.equal(board);
-      expect(result[0]).not.to.equal(board[0]);
-      expect(result[1]).not.to.equal(board[1]);
-      expect(result[2]).not.to.equal(board[2]);
+      expect(result).not.toBe(board);
+      expect(result[0]).not.toBe(board[0]);
+      expect(result[1]).not.toBe(board[1]);
+      expect(result[2]).not.toBe(board[2]);
     });
     const singleCellTestCases = [
       [
@@ -60,13 +59,13 @@ describe('game_of_life', () => {
       ]
     ];
     singleCellTestCases.forEach(board => {
-      it('should kill the single cell with no neigbors', () => {
+      it("should kill the single cell with no neigbors", () => {
         // Arrange
         const expected = emptyBoard;
         // Act
         const result = tick(board);
         // Assert
-        expect(result).to.eql(expected);
+        expect(result).toEqual(expected);
       });
     });
 
@@ -88,13 +87,13 @@ describe('game_of_life', () => {
       ]
     ];
     oneNeighborTestCases.forEach(board => {
-      it('should kill the cell with only one neighbor', () => {
+      it("should kill the cell with only one neighbor", () => {
         // Arrange
         const expected = emptyBoard;
         // Act
         const result = tick(board);
         // Assert
-        expect(result).to.eql(expected);
+        expect(result).toEqual(expected);
       });
     });
 
@@ -111,12 +110,12 @@ describe('game_of_life', () => {
       ]
     ];
     twoNeighborTestCasesWithCentralSurvivor.forEach(board => {
-      it('should keep a cell alive if it has two neighbors', () => {
+      it("should keep a cell alive if it has two neighbors", () => {
         // Arrange
         // Act
         const result = tick(board);
         // Assert
-        expect(result[1][1]).to.equal(1);
+        expect(result[1][1]).toEqual(1);
       });
     });
 
@@ -138,16 +137,16 @@ describe('game_of_life', () => {
       ]
     ];
     threeNeighborTestCasesWithCentralSurvivor.forEach(board => {
-      it('should keep a cell alive if it has three neigbors', () => {
+      it("should keep a cell alive if it has three neigbors", () => {
         // Arrange
         // Act
         const result = tick(board);
         // Assert
-        expect(result[1][1]).to.equal(1);
+        expect(result[1][1]).toEqual(1);
       });
     });
 
-    it('should keep a corner cell alive if it has two neighbors v1', () => {
+    it("should keep a corner cell alive if it has two neighbors v1", () => {
       // Arrange
       const
         board = [
@@ -158,9 +157,9 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result[0][0]).to.equal(1);
+      expect(result[0][0]).toEqual(1);
     });
-    it('should keep a corner cell alive if it has two neighbors v2', () => {
+    it("should keep a corner cell alive if it has two neighbors v2", () => {
       // Arrange
       const
         board = [
@@ -171,10 +170,10 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result[0][2]).to.equal(1);
+      expect(result[0][2]).toEqual(1);
     });
 
-    it('should keep a corner cell alive if it has three neighbors v1', () => {
+    it("should keep a corner cell alive if it has three neighbors v1", () => {
       // Arrange
       const
         board = [
@@ -185,9 +184,9 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result[2][0]).to.equal(1);
+      expect(result[2][0]).toEqual(1);
     });
-    it('should keep a corner cell alive if it has three neighbors v2', () => {
+    it("should keep a corner cell alive if it has three neighbors v2", () => {
       // Arrange
       const
         board = [
@@ -198,7 +197,7 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result[0][2]).to.equal(1);
+      expect(result[0][2]).toEqual(1);
     });
 
     const fourNeighborWithCentralDeathTestCases = [
@@ -219,12 +218,12 @@ describe('game_of_life', () => {
       ],
     ];
     fourNeighborWithCentralDeathTestCases.forEach(board => {
-      it('will kill the cell with four neighbors', () => {
+      it("will kill the cell with four neighbors", () => {
         // Arrange
         // Act
         const result = tick(board);
         // Assert
-        expect(result[1][1]).to.equal(0);
+        expect(result[1][1]).toEqual(0);
       });
     });
     const fiveNeighborWithCentralDeathTestCases = [
@@ -245,12 +244,12 @@ describe('game_of_life', () => {
       ],
     ];
     fiveNeighborWithCentralDeathTestCases.forEach(board => {
-      it('will kill the cell with five neighbors', () => {
+      it("will kill the cell with five neighbors", () => {
         // Arrange
         // Act
         const result = tick(board);
         // Assert
-        expect(result[1][1]).to.equal(0);
+        expect(result[1][1]).toEqual(0);
       });
     });
 
@@ -262,16 +261,16 @@ describe('game_of_life', () => {
       ]
     ];
     centralBirthTestCases.forEach(board => {
-      it('', () => {
+      it("", () => {
         // Arrange
         // Act
         const result = tick(board);
         // Assert
-        expect(result[1][1]).to.equal(1);
+        expect(result[1][1]).toEqual(1);
       });
     });
 
-    it('should spawn at corner with two neighbors, v1', () => {
+    it("should spawn at corner with two neighbors, v1", () => {
       // Arrange
       const board = [
         [0, 1, 0],
@@ -281,9 +280,9 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result[0][2]).to.equal(1);
+      expect(result[0][2]).toEqual(1);
     });
-    it('should spawn at corner with two neighbors, v1', () => {
+    it("should spawn at corner with two neighbors, v1", () => {
       // Arrange
       const board = [
         [0, 1, 0],
@@ -293,12 +292,12 @@ describe('game_of_life', () => {
       // Act
       const result = tick(board);
       // Assert
-      expect(result[2][2]).to.equal(1);
+      expect(result[2][2]).toEqual(1);
     });
 
-    describe('known patterns', () => {
-      describe('blinker', () => {
-        it('should go vertical after being flat', () => {
+    describe("known patterns", () => {
+      describe("blinker", () => {
+        it("should go vertical after being flat", () => {
           // Arrange
           const
             board = [
@@ -314,10 +313,10 @@ describe('game_of_life', () => {
           // Act
           const result = tick(board);
           // Assert
-          expect(result).to.eql(expected);
+          expect(result).toEqual(expected);
         });
       });
-      it('should go flat after being vertical', () => {
+      it("should go flat after being vertical", () => {
         // Arrange
         const
           expected = [
@@ -333,10 +332,10 @@ describe('game_of_life', () => {
         // Act
         const result = tick(board);
         // Assert
-        expect(result).to.eql(expected);
+        expect(result).toEqual(expected);
       });
     });
-    describe('block', () => {
+    describe("block", () => {
       const blockTestCases = [
         [
           [0, 1, 1],
@@ -355,16 +354,16 @@ describe('game_of_life', () => {
         ],
       ];
       blockTestCases.forEach(board => {
-        it('should not change', () => {
+        it("should not change", () => {
           // Arrange
           // Act
           const result = tick(board);
           // Assert
-          expect(result).to.eql(board);
+          expect(result).toEqual(board);
         });
       });
     });
-    describe('glider', () => {
+    describe("glider", () => {
       const steps = [
         [
           [ 0, 1, 0, 0 ],
@@ -385,12 +384,12 @@ describe('game_of_life', () => {
           [ 0, 1, 1, 0 ]
         ],
       ];
-      it('should progress through known steps', () => {
+      it("should progress through known steps", () => {
         // Arrange
         // Act
         for (let i = 0; i < steps.length - 1; i++) {
           const result = tick(steps[i]);
-          expect(result).to.eql(steps[i + 1]);
+          expect(result).toEqual(steps[i + 1]);
         }
         // Assert
       });
