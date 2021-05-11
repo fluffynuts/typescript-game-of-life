@@ -30,7 +30,7 @@
     "axel": "0.0.3",
     "blessed": "^0.1.81",
     "keypress": "^0.2.1",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
